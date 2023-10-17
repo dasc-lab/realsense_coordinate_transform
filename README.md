@@ -23,7 +23,7 @@
 
 
 ## Coordinate Transformation System Diagram
-World Coordinates and Quaternion of the ground robot -> 4x4 Homogeneous Matrix\begin{bmatrix} X \\\ Y \end{bmatrix}-> 
+World Coordinates and Quaternion of the ground robot -> 4x4 Homogeneous matrix transform -> Coordinates of the ground robot in camera frame -> Project 3D point coordinates to 2D pixel coordinates -> robot appears on the expected coordinates of the image
 
 ## Potential Applications
 This script can be useful for robotic systems that involve aerial video streaming or image capturing in an indoor setting. For instance, our in-door system involves an overhead drone hovering at a 2-meter altitude, which is the current altitude limit for the Vicon system. The quaternions and coordinates of both the drone and the ground robot will be broadcasted by the Vicon system. A homogeneous transformation will be performed to predict the pixel coordinates of the ground robot in the camera space. Owing to the constant evolving nature of this project, we may update this page if we find a way to apply this system to an outdoor setting.
