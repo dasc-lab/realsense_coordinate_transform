@@ -9,8 +9,8 @@
 
 ## Prerequisites
 1. Python 3
-2. Set up [Vicon bridge](https://github.com/dasc-lab/ros2-vicon-bridge/tree/main)
-3. Vicon Coordinate System tracker and broadcaster
+2. Vicon Coordinate System tracker and broadcaster
+3. Set up [Vicon bridge](https://github.com/dasc-lab/ros2-vicon-bridge/tree/main)
 4. [Robot Operating System 2 (ROS2)](https://docs.ros.org/en/foxy/index.html)
 5. OpenCV2 for image processing and writing
 6. [Realsense libraries](https://github.com/IntelRealSense/librealsense) for Camera intrinsics and video streaming to Jetson Xavier
@@ -26,8 +26,16 @@
 
 ## System Details
 * Initializes Vicon coordinate frame and start tracking your robot.
-* 
-
+  * At least three Vicon dots will need to be placed on the robot for the tracker to initialize the robot in the system.
+  * Initialize the robot in the system by selecting the three Vicon dots attached to the robot in the 'Object' tab of the interface and enter a name for it.
+  * Click 'Track' to start broadcasting the pose and coordinate of the robot through ROS2
+* Set up Vicon Bridge
+  * Open up a terminal window and in your project `/ros2_ws/src` folder,  enter `source install/setup.bash`
+  * Run Vicon bridge with the command `ros2 launch vicon_bridge all_segments.yaml`
+  * (Optional) In a new terminal, run the command `ros2 topic list` to see the current available topics
+  * In a new terminal, run the command `ros2 topic echo /your_topic_name' to visualize the broadcasted information
+* `cd` into the folder that contains `coordinate_transform.py`, run the file using python3 run `coordinate_transform.py`
+  
 ## Coordinate Transformation System Diagram
 World Coordinates and Quaternion of the ground robot -> 4x4 Homogeneous matrix transform -> Coordinates of the ground robot in camera frame -> Project 3D point coordinates to 2D pixel coordinates -> robot appears on the expected coordinates of the image
 
