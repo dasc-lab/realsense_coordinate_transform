@@ -8,11 +8,13 @@
 4. A ground robot whose coordinates will be used as inputs for the algorithms
 
 ## Prerequisites
-1. Python
+1. Python 3
 2. Vicon Coordinate System tracker and broadcaster
 3. [Robot Operating System 2 (ROS2)](https://docs.ros.org/en/foxy/index.html)
-4. OpenCV for image processing and writing
+4. OpenCV2 for image processing and writing
 5. Realsense libraries for Camera intrinsics and video streaming to Jetson Xavier
+6. [Numpy](https://numpy.org/install/) for transforming quaternions to rotation matrices and other basic operations
+
 
 ## System Overview
 * This portion of the system first takes two pieces of information of the ground robot from the Vicon system -its Quaternion and Vicon Frame coordinates - and broadcasts them via a ROS publisher.
