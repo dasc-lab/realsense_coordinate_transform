@@ -34,7 +34,7 @@
   * Run Vicon bridge with the command `ros2 launch vicon_bridge all_segments.yaml`
   * (Optional) In a new terminal, run the command `ros2 topic list` to see the current available topics
   * In a new terminal, run the command `ros2 topic echo /your_topic_name' to visualize the broadcasted information
-* `cd` into the folder that contains `coordinate_transform.py`, run the file using python3 run `coordinate_transform.py`
+* `cd` into the folder that contains `coordinate_transform.py`, run the file using `python3 run coordinate_transform.py`
   
 ## Coordinate Transformation System Diagram
 World Coordinates and Quaternion of the ground robot -> 4x4 Homogeneous matrix transform -> Coordinates of the ground robot in camera frame -> Project 3D point coordinates to 2D pixel coordinates -> robot appears on the expected coordinates of the image
