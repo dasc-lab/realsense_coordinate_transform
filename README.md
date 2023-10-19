@@ -12,7 +12,7 @@
 2. Vicon Coordinate System tracker and broadcaster
 3. [Robot Operating System 2 (ROS2)](https://docs.ros.org/en/foxy/index.html)
 4. OpenCV2 for image processing and writing
-5. Realsense libraries for Camera intrinsics and video streaming to Jetson Xavier
+5. [Realsense libraries](https://github.com/IntelRealSense/librealsense) for Camera intrinsics and video streaming to Jetson Xavier
 6. [Numpy](https://numpy.org/install/) for transforming quaternions to rotation matrices and other basic operations
 
 
