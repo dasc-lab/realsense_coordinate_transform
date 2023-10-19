@@ -9,11 +9,12 @@
 
 ## Prerequisites
 1. Python 3
-2. Vicon Coordinate System tracker and broadcaster
-3. [Robot Operating System 2 (ROS2)](https://docs.ros.org/en/foxy/index.html)
-4. OpenCV2 for image processing and writing
-5. [Realsense libraries](https://github.com/IntelRealSense/librealsense) for Camera intrinsics and video streaming to Jetson Xavier
-6. [Numpy](https://numpy.org/install/) for transforming quaternions to rotation matrices and other basic operations
+2. Set up [Vicon bridge](https://github.com/dasc-lab/ros2-vicon-bridge/tree/main)
+3. Vicon Coordinate System tracker and broadcaster
+4. [Robot Operating System 2 (ROS2)](https://docs.ros.org/en/foxy/index.html)
+5. OpenCV2 for image processing and writing
+6. [Realsense libraries](https://github.com/IntelRealSense/librealsense) for Camera intrinsics and video streaming to Jetson Xavier
+7. [Numpy](https://numpy.org/install/) for transforming quaternions to rotation matrices and other basic operations
 
 
 ## System Overview
@@ -23,6 +24,9 @@
 * Since the camera is fixed on the bottom of the drone, the coordinate transformation between drone frame and camera frame is constant and trivial.
 * With the help of extensive realsense libraries, the script utilizes [rs2_project_point_to_pixel(...)](https://github.com/IntelRealSense/librealsense/wiki/Projection-in-RealSense-SDK-2.0) to subsequently obtain the camera intrinsics and calculates the predicted pixel coordinates of the ground robot in pixel space based on the camera coordinates of the said ground robot. 
 
+## System Details
+* Initializes Vicon coordinate frame and start tracking your robot.
+* 
 
 ## Coordinate Transformation System Diagram
 World Coordinates and Quaternion of the ground robot -> 4x4 Homogeneous matrix transform -> Coordinates of the ground robot in camera frame -> Project 3D point coordinates to 2D pixel coordinates -> robot appears on the expected coordinates of the image
