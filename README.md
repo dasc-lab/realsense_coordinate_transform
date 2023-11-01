@@ -38,6 +38,8 @@
   
 ## Coordinate Transformation System Diagram
 ![alt text](https://github.com/dasc-lab/realsense_coordinate_transform/blob/main/system_diagram.drawio%20(1).png)
+
+
 World Coordinates and Quaternion of the ground robot -> 4x4 Homogeneous matrix transform -> Coordinates of the ground robot in camera frame -> Project 3D point coordinates to 2D pixel coordinates -> robot appears on the expected coordinates of the image
 
 ## Potential Applications
