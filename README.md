@@ -22,7 +22,7 @@
 * A ROS subcriber subsumed in the python script would process the broadcasted quaternion and translation in real time on Jetson Xavier strapped onto the drone.
 * The script then expresses the quaternion in terms of a rotation matrix and subsequently performs homogeneous transformation on the ground robot Vicon coordinates to compute the camera coordinates of the ground robot.
 * Since the camera is fixed on the bottom of the drone, the coordinate transformation between drone frame and camera frame is constant and trivial.
-* With the help of extensive realsense libraries, the script utilizes [rs2_project_point_to_pixel(...)](https://github.com/IntelRealSense/librealsense/wiki/Projection-in-RealSense-SDK-2.0) to subsequently obtain the camera intrinsics and calculates the predicted pixel coordinates of the ground robot in pixel space based on the camera coordinates of the said ground robot. 
+* With the help of realsense libraries, the script utilizes [rs2_project_point_to_pixel(...)](https://github.com/IntelRealSense/librealsense/wiki/Projection-in-RealSense-SDK-2.0) to subsequently obtain the camera intrinsics and calculates the predicted pixel coordinates of the ground robot in pixel space based on the camera coordinates of the said ground robot. 
 
 ## System Details
 * Initializes Vicon coordinate frame and start tracking your robot.
@@ -37,7 +37,7 @@
 * `cd` into the folder that contains `coordinate_transform.py`, run the file using `python3 run coordinate_transform.py`
   
 ## Coordinate Transformation System Diagram
-![alt text] (https://github.com/dasc-lab/realsense_coordinate_transform/blob/main/system_diagram.drawio.png)
+![alt text](https://github.com/dasc-lab/realsense_coordinate_transform/blob/main/system_diagram.drawio.png)
 World Coordinates and Quaternion of the ground robot -> 4x4 Homogeneous matrix transform -> Coordinates of the ground robot in camera frame -> Project 3D point coordinates to 2D pixel coordinates -> robot appears on the expected coordinates of the image
 
 ## Potential Applications
