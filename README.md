@@ -1,13 +1,13 @@
 
 # Coordinate Transformation of a Ground Robot from Vicon Frame to Realsense Camera Pixel Space
 [comment]: ## realsense_coordinate_transform
-## Components
+## Integral Components
 1. [Vicon Coordinate System](https://www.vicon.com/) as world frame
-2. [Robot Operating System 2 (ROS2)](https://docs.ros.org/en/foxy/index.html) for transmitting coordinate data
-3. Real Sense Camera and Nvidia Jetson Xavier attached to the bottom of a drone
-4. A ground robot whose coordinates will be used as inputs for the algorithms
+3. [Robot Operating System 2 (ROS2)](https://docs.ros.org/en/foxy/index.html) for transmitting coordinate data
+4. Real Sense Camera and Nvidia Jetson Xavier attached to a drone
+5. A ground robot whose coordinates will be used as inputs for the algorithms
 
-## Prerequisites
+## Software Prerequisites
 1. Python 3
 2. Vicon Coordinate System tracker and broadcaster
 3. Set up [Vicon bridge](https://github.com/dasc-lab/ros2-vicon-bridge/tree/main)
