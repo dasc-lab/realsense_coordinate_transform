@@ -33,7 +33,7 @@
   * Open up a terminal window and in your project `/ros2_ws/src` folder,  enter `source install/setup.bash`
   * Run Vicon bridge with the command `ros2 launch vicon_bridge all_segments.yaml`
   * (Optional) In a new terminal, run the command `ros2 topic list` to see the current available topics
-  * In a new terminal, run the command `ros2 topic echo /your_topic_name' to visualize the broadcasted information
+  * In a new terminal, run the command `ros2 topic echo /your_topic_name' to visualize the broadcast information
 * `cd` into the folder that contains `coordinate_transform.py`, run the file using `python3 run coordinate_transform.py`
   
 ## Coordinate Transformation System Diagram
