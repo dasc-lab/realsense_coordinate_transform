@@ -31,7 +31,7 @@ class MinimalSubscriber(Node):
 		self.robot_quat = None
 		self.robot_trans = None
         
-        self.publisher_ = self.create_publisher(TransformStamped,'pixel_coordinates_robot',10);
+        self.publisher_ = self.create_publisher(TransformStamped,'pixel_coordinates_robot',10)
 		
 		self.pipe = rs.pipeline()
 		self.cfg = rs.config()
