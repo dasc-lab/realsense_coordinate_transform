@@ -19,19 +19,16 @@ from scipy.spatial.transform import Rotation as R
 from std_msgs.msg import String
 from stream_transform import rot_to_hom, world_to_drone,drone_to_camera
 
-
-    
 class MinimalSubscriber(Node):
    
 	def __init__(self):
-		
+		## initializing the camera
 		super().__init__('minimal_subscriber')
 		self.quat = None
 		self.trans = None
 		self.robot_quat = None
 		self.robot_trans = None
-        
-        self.publisher_ = self.create_publisher(TransformStamped,'pixel_coordinates_robot',10)
+
 		
 		self.pipe = rs.pipeline()
 		self.cfg = rs.config()
@@ -54,21 +51,7 @@ class MinimalSubscriber(Node):
 		    10)  
 		self.timer = self.create_timer(1./30., self.timer_callback)
 		#self.subscription  # prevent unused variable warning
-        
-    def create_TransformStamped_msg(self, pixel_coordinates):
-        transform_stamped_msg = TransformStamped()
-        transform_stamped_msg.header.stamp = self.get_clock().now().to_msg()
-        transform_stamped_msg.header.frame_id = 'parent_frame'
-        transform_stamped_msg.child_frame_id = 'child_frame'
-        transform_stamped_msg.translation.x = pixel_coordinates[0]
-        transform_stamped_msg.translation.y = pixel_coordinates[1]
-        transform_stamped_msg.transform.translation.z = 0.0
-        transform_stamped_msg.transform.rotation.x = 0.0
-        transform_stamped_msg.transform.rotation.y = 0.0
-        transform_stamped_msg.transform.rotation.z = 0.0
-        transform_stamped_msg.transform.rotation.w = 1.0
-        return transform_stamped_msg
-        
+		
 	def listener_callback_robot(self, msg):
 	    self.robot_quat = msg.transform.rotation
 	    self.robot_trans = msg.transform.translation
@@ -80,7 +63,19 @@ class MinimalSubscriber(Node):
 	    self.trans = msg.transform.translation
 	    #print("camera_info received")
 	    #self.get_logger().info('I heard: "%s"' % msg.data)
-
+	def create_TransformStamped_msg(self, pixel_coordinates):
+		transform_stamped_msg = TransformStamped()
+		transform_stamped_msg.header.stamp = self.get_clock().now().to_msg()
+		transform_stamped_msg.header.frame_id = 'parent_frame'
+		transform_stamped_msg.child_frame_id = 'child_frame'
+		transform_stamped_msg.translation.x = pixel_coordinates[0]
+		transform_stamped_msg.translation.y = pixel_coordinates[1]
+		transform_stamped_msg.transform.translation.z = 0.0
+		transform_stamped_msg.transform.rotation.x = 0.0
+		transform_stamped_msg.transform.rotation.y = 0.0
+		transform_stamped_msg.transform.rotation.z = 0.0
+		transform_stamped_msg.transform.rotation.w = 1.0
+		return transform_stamped_msg
 	def timer_callback(self):
 		#pdb.set_trace()
 		robot_trans = self.robot_trans
@@ -112,15 +107,18 @@ class MinimalSubscriber(Node):
 			color_frame = frame.get_color_frame()
 
 			depth_image = np.asanyarray(depth_frame.get_data())
+			depth_cm = cv2.applyColorMap(cv2.convertScaleAbs(depth_image,alpha = 0.5), cv2.COLORMAP_JET)
 			color_image = np.asanyarray(color_frame.get_data())
 			#color_intrin = color_frame.as_video_stream_profile().intrinsics
 
-			
+			depth_intrin = depth_image.profile.as_video_stream_profile().intrinsics
+			depth = depth_frame.get_distance(100,100)
+			depth_point = rs.rs2_deproject_pixel_to_point(depth_intrin, [100,100], depth)
+			print(depth_points)
 			pixel_coordinates = (int(pixel_coordinates[0]), int(pixel_coordinates[1]))
-            self.publisher_.publish(self.create_TransformStamped_msg(pixel_coordinates))
 			color_image = cv2.circle(color_image, pixel_coordinates, 20, 1, 2)
 			cv2.imshow('rgb', color_image)
-			cv2.imshow('depth', depth_image)
+			cv2.imshow('depth', depth_cm)
 			if cv2.waitKey(1) == 115:
 			#cv.imwrite(str(device)+'_aligned_depth.png', depth_image)
 				cv2.imwrite('_aligned_color.png',color_image)
@@ -138,11 +136,19 @@ def main(args=None):
 	rclpy.spin(minimal_subscriber)
 	
 	
-		
-		
-		
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+		
+		
 
 
 
