@@ -5,7 +5,8 @@
 1. [Vicon Coordinate System](https://www.vicon.com/) as world frame
 3. [Robot Operating System 2 (ROS2)](https://docs.ros.org/en/foxy/index.html) for transmitting coordinate data
 4. Real Sense Camera and Nvidia Jetson Xavier attached to a drone
-5. A ground robot whose coordinates will be used as inputs for the algorithms
+5. A ground robot whose coordinates will be used as inputs for the algorithm
+6. Raspberry Pi computer on each ground robot for optimal route planning
 
 ## Software Prerequisites
 1. Python 3
