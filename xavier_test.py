@@ -24,7 +24,7 @@ class MinimalSubscriber(Node):
 	def __init__(self):
 		## initializing the camera
 		super().__init__('minimal_subscriber')
-		self.output = cv2.VideoWriter('output.avi', cv2.VideoWriter_fourcc(*'MPEG'), 30, (640,480))
+		#self.output = cv2.VideoWriter('output.avi', cv2.VideoWriter_fourcc(*'MPEG'), 30, (640,480))
 		self.quat = None
 		self.trans = None
 		self.robot_quat = None
@@ -38,7 +38,7 @@ class MinimalSubscriber(Node):
 		self.frame_count = 0
 		self.frame_limit = 120
 		# Setup server
-		self.HOST = '192.168.1.118'  # Server IP address
+		self.HOST = '192.168.1.134'  # Server IP address
 		self.PORT = 9999
 		self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		self.server_socket.bind((self.HOST, self.PORT))
@@ -65,7 +65,7 @@ class MinimalSubscriber(Node):
 		    TransformStamped,
 		    #'/vicon/kepler/kepler',
 		    #'/vicon/kepler/kepler',
-		    '/vicon/teleop_rover/teleop_rover',
+		    '/vicon/px4_1/px4_1',
 		    self.listener_callback_robot,
 		    10)
 		self.camera_subscription = self.create_subscription(
@@ -89,6 +89,8 @@ class MinimalSubscriber(Node):
 	    self.trans = msg.transform.translation
 	    #print("camera_info received")
 	    #self.get_logger().info('I heard: "%s"' % msg.data)
+	# def create_px4_msg(self, world_coordinates):
+		
 	def create_TransformStamped_msg(self, pixel_coordinates):
 		transform_stamped_msg = TransformStamped()
 		transform_stamped_msg.header.stamp = self.get_clock().now().to_msg()
@@ -190,7 +192,7 @@ class MinimalSubscriber(Node):
 				        if (time.time() - self.curr_time > 3):
 				        	self.curr_time = time.time()
 				        	#self.trails = [trail[self.remove_index:] for trail in self.trails]
-				        	self.trails[i] = self.trails[i][20:]
+				        	self.trails[i] = self.trails[i][40:]
 				# Draw the current position of the circle
 				if pos != (None,None):
 				    self.draw_circle(color_image, (int(pos[0]), int(pos[1])), self.radius, self.circle_colors[i])
@@ -199,7 +201,7 @@ class MinimalSubscriber(Node):
 			cv2.imshow('rgb', color_image)
 			cv2.imshow('depth', depth_cm)
 			
-			self.output.write(color_image)
+			#self.output.write(color_image)
 			_, buffer = cv2.imencode('.jpg', color_image)
 
 			# Send the size of the frame and then the frame
